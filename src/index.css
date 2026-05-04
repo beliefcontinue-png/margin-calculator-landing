@@ -1,0 +1,18 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Pretendard", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-primary-start: #4F46E5;
+  --color-primary-end: #7C3AED;
+  --color-accent: #10B981;
+  --color-bg-light: #F8FAFC;
+  --color-dark: #0F172A;
+}
+
+body {
+  font-family: "Pretendard", "Inter", sans-serif;
+  color: #1E293B;
+  background-color: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+}
