@@ -41,10 +41,10 @@ export default function FooterCTA() {
       setFormData({ name: '', phone: '', email: '', businessType: '', businessNumber: '' });
       alert('신청이 성공적으로 완료되었습니다!');
 
-    } catch (error: any) {
-      console.error('Error submitting form:', error?.message, error?.details, error?.hint, error?.code);
+    } catch (error) {
+      console.error('Error submitting form', error);
       setStatus('error');
-      alert(`오류: ${error?.message || '알 수 없는 오류'}`);
+      alert('전송 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
