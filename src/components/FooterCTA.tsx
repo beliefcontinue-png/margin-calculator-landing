@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { useState } from 'react';
+import { supabase } from '../lib/supabase';
 
 export default function FooterCTA() {
   const [formData, setFormData] = useState({
@@ -24,24 +25,22 @@ export default function FooterCTA() {
     }
 
     setStatus('loading');
-    
-    const GAS_URL = import.meta.env.VITE_GAS_URL || 'https://script.google.com/macros/s/AKfycbxu4JhRf93X3Ty9nc3HXvptS-5hNWS59zYp6ckj872GHOE9ULWDTkunnJBhU5VjgU0s/exec';
 
     try {
-      await fetch(GAS_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      const { error } = await supabase.from('email_signups').insert({
+        email: formData.email,
+        name: formData.name,
+        phone: formData.phone,
+        business_type: formData.businessType,
+        business_number: formData.businessNumber,
       });
-      
-      // no-cors 모드에서는 opaque 응답이 오므로 에러가 오지 않은 것으로 간주
+
+      if (error) throw error;
+
       setStatus('success');
       setFormData({ name: '', phone: '', email: '', businessType: '', businessNumber: '' });
       alert('신청이 성공적으로 완료되었습니다!');
-      
+
     } catch (error) {
       console.error('Error submitting form', error);
       setStatus('error');
